@@ -12,7 +12,7 @@
     {
       "name": "code-quality",
       "description": "Code review agent, JSDoc/TSDoc generator, and unit test writer for TypeScript/JavaScript projects.",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "source": "./plugins/code-quality"
     }
   ]

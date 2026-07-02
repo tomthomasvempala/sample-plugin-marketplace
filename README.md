@@ -18,45 +18,58 @@ A reference repository demonstrating how to package and share GitHub Copilot cus
 
 ```
 .github/
-├── copilot-instructions.md              # VS Code: global agent behavior
+├── copilot-instructions.md              # VS Code only: global agent behavior
 ├── plugin/
 │   └── marketplace.json                 # CLI: marketplace registry
-├── agents/
-│   └── code-reviewer.agent.md           # VS Code: agent discovery
-├── skills/
-│   ├── generate-docs/SKILL.md           # VS Code: skill discovery
-│   └── write-tests/SKILL.md
-└── instructions/
+└── instructions/                        # VS Code only: file-scoped instructions
     ├── coding-standards.instructions.md
     ├── typescript.instructions.md
     └── api-design.instructions.md
 
 plugins/
-└── code-quality/                        # CLI: installable plugin
-    ├── plugin.json                      #   Plugin manifest
+└── code-quality/                        # Single source of truth for agents + skills
+    ├── plugin.json                      # CLI plugin manifest
     ├── agents/
-    │   └── code-reviewer.agent.md
+    │   └── code-reviewer.agent.md       # Loaded by CLI and VS Code once plugin is installed
     └── skills/
         ├── generate-docs/SKILL.md
         └── write-tests/SKILL.md
 ```
 
+> **Note on instructions**: `.instructions.md` files are a VS Code-only feature. There is no equivalent in the CLI plugin spec — they only apply when the repo is open in VS Code, not when the plugin is installed via CLI.
+
 ## Installing via Copilot CLI
 
-Add this marketplace and install the plugin in one step:
+### Option A — Via marketplace (recommended for teams)
 
 ```shell
-# Add the marketplace (replace with your org/repo name after pushing to GitHub)
+# 1. Register the marketplace (replace with your actual GitHub org/repo)
 copilot plugin marketplace add your-org/sample-plugin-marketplace
 
-# Install the code-quality plugin
-copilot plugin install code-quality
+# 2. Install using plugin-name@marketplace-name
+copilot plugin install code-quality@sample-plugin-marketplace
 
-# Verify it loaded
+# 3. Verify it loaded
 copilot plugin list
 ```
 
-To use it in a Copilot CLI session:
+> The marketplace name comes from the `name` field in `marketplace.json` — currently `sample-plugin-marketplace`.
+
+### Option B — Direct install from GitHub (no marketplace registration needed)
+
+```shell
+# Install from a subdirectory of the GitHub repo
+copilot plugin install your-org/sample-plugin-marketplace:plugins/code-quality
+```
+
+### Option C — Local install (for development/testing)
+
+```shell
+# From the repo root on your machine
+copilot plugin install ./plugins/code-quality
+```
+
+To use it in a Copilot CLI session after installing:
 
 ```
 /agent            # lists code-reviewer
@@ -65,16 +78,20 @@ To use it in a Copilot CLI session:
 
 ## Using in VS Code
 
-The `.github/` folder is automatically discovered by VS Code Copilot:
+Install the plugin locally first — this makes agents and skills available in both VS Code and the CLI:
+
+```shell
+copilot plugin install ./plugins/code-quality
+```
 
 | Customization | How to trigger |
 |---------------|----------------|
 | `code-reviewer` agent | Select in the agent picker or `@Code Reviewer` in chat |
 | `generate-docs` skill | Type `/generate-docs` in chat |
 | `write-tests` skill | Type `/write-tests` in chat |
-| `coding-standards` instructions | Auto-applied to `src/**` files |
-| `typescript` instructions | Auto-applied to `*.ts` / `*.tsx` files |
-| `api-design` instructions | Loaded on demand when working on API routes |
+| `coding-standards` instructions | Auto-applied to `src/**` files (VS Code only) |
+| `typescript` instructions | Auto-applied to `*.ts` / `*.tsx` files (VS Code only) |
+| `api-design` instructions | Loaded on demand when working on API routes (VS Code only) |
 
 ## Publishing to Your Organisation
 
@@ -83,9 +100,13 @@ The `.github/` folder is automatically discovered by VS Code Copilot:
    ```shell
    copilot plugin marketplace add your-org/copilot-plugins
    ```
-3. They can then install any plugin listed in `marketplace.json`:
+3. They install the plugin using `plugin-name@marketplace-name`:
    ```shell
-   copilot plugin install code-quality
+   copilot plugin install code-quality@sample-plugin-marketplace
+   ```
+   Or directly, without registering the marketplace:
+   ```shell
+   copilot plugin install your-org/copilot-plugins:plugins/code-quality
    ```
 
 To keep it **internal only**, set the repository visibility to **Private** — the CLI respects your GitHub auth token when fetching from private repos.
