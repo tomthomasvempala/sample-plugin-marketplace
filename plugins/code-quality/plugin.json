@@ -1,0 +1,13 @@
+{
+  "name": "code-quality",
+  "description": "Code review agent, JSDoc/TSDoc documentation generator, and unit test writer for TypeScript/JavaScript projects.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Your Organization",
+    "email": "copilot-plugins@example.com"
+  },
+  "license": "MIT",
+  "keywords": ["typescript", "code-review", "testing", "documentation", "jsdoc"],
+  "agents": "agents/",
+  "skills": ["skills/"]
+}
