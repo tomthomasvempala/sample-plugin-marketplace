@@ -1,0 +1,20 @@
+name: code-quality
+version: 1.1.0
+description: Code review agent, JSDoc/TSDoc documentation generator, and unit test writer for TypeScript/JavaScript projects.
+author: "Tom's marketplace"
+license: MIT
+
+# Pin to Copilot. Add more targets (claude, cursor, kiro…) to deploy to those tools too.
+# apm install -t copilot  →  deploys .apm/ primitives to .github/
+targets:
+  - copilot
+
+# hybrid = compile instructions into AGENTS.md AND install skills natively
+type: hybrid
+includes: auto
+
+scripts: {}
+
+dependencies:
+  apm: []
+  mcp: []
