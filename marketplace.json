@@ -1,0 +1,18 @@
+{
+  "marketplace": {
+    "version": "1.0",
+    "plugins": [
+      {
+        "id": "code-quality",
+        "name": "Code Quality",
+        "description": "Analyze and improve code quality",
+        "version": "1.0.0",
+        "author": "Tom",
+        "category": "productivity",
+        "rating": 4.8,
+        "downloads": 15420,
+        "enabled": true
+      }
+    ]
+  }
+}
