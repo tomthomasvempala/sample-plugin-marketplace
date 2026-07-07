@@ -1,18 +1,19 @@
 {
-  "marketplace": {
-    "version": "1.0",
-    "plugins": [
-      {
-        "id": "code-quality",
-        "name": "Code Quality",
-        "description": "Analyze and improve code quality",
-        "version": "1.0.0",
-        "author": "Tom",
-        "category": "productivity",
-        "rating": 4.8,
-        "downloads": 15420,
-        "enabled": true
-      }
-    ]
-  }
+  "name": "sample-plugin-marketplace",
+  "owner": {
+    "name": "Your Organization",
+    "email": "copilot-plugins@example.com"
+  },
+  "metadata": {
+    "description": "Curated GitHub Copilot CLI plugins for code quality — review, documentation, and testing.",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "code-quality",
+      "description": "Code review agent, JSDoc/TSDoc generator, and unit test writer for TypeScript/JavaScript projects.",
+      "version": "1.1.0",
+      "source": "./plugins/code-quality"
+    }
+  ]
 }
