@@ -1,0 +1,17 @@
+name: base
+version: 1.0.0
+description: Shared coding standards, REST API design guidelines, code reviewer agent, and language-agnostic test/doc skills. Intended as a dependency for language-specific packages.
+author: "Tom's marketplace"
+license: MIT
+
+targets:
+  - copilot
+
+type: hybrid
+includes: auto
+
+scripts: {}
+
+dependencies:
+  apm: []
+  mcp: []
