@@ -14,5 +14,5 @@ scripts: {}
 
 dependencies:
   apm:
-    - base@^1.0.0
+    - path: ../base
   mcp: []
