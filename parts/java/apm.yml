@@ -1,6 +1,6 @@
-name: react
+name: java
 version: 1.0.0
-description: React and TypeScript coding standards, component patterns, and testing skills for React projects.
+description: Java coding standards, Spring Boot patterns, and JUnit/Mockito testing skills for Java projects.
 author: "Tom's marketplace"
 license: MIT
 
@@ -14,5 +14,5 @@ scripts: {}
 
 dependencies:
   apm:
-    - path: ../base
+    - path: ../../base
   mcp: []

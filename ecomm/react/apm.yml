@@ -1,0 +1,18 @@
+name: react
+version: 1.0.0
+description: React and TypeScript coding standards, component patterns, and testing skills for React projects.
+author: "Tom's marketplace"
+license: MIT
+
+targets:
+  - copilot
+
+type: hybrid
+includes: auto
+
+scripts: {}
+
+dependencies:
+  apm:
+    - path: ../../base
+  mcp: []
